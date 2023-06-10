@@ -1,0 +1,31 @@
+Windows Registry Editor Version 5.00
+
+; this file adds context menu options to open cmd.exe from both
+; right click on the background of current directory and and right 
+; click on folder. It also allows opening of files at command line
+; directly from the context menu.
+
+; define behavior for right click on a directory
+[HKEY_CLASSES_ROOT\Directory\shell\CommandWindow]
+@="Open Command Line Here"
+"Icon"="\"C:\\Windows\\System32\\cmd.exe\""
+
+[HKEY_CLASSES_ROOT\Directory\shell\CommandWindow\command]
+@="cmd.exe /s /k pushd \"%1\""
+
+
+; define behavior for right click on a directory
+[HKEY_CLASSES_ROOT\Directory\Background\shell\CommandWindow]
+@="Open Command Line Here"
+"Icon"="\"C:\\Windows\\System32\\cmd.exe\""
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\CommandWindow\command]
+@="cmd.exe /s /k pushd \"%V\""
+
+; define right click on file (open file)
+[HKEY_CLASSES_ROOT\*\shell\Open at CMD]
+@="Open at Command Line"
+"Icon"="\"C:\\Windows\\System32\\cmd.exe\""
+
+[HKEY_CLASSES_ROOT\*\shell\Open at CMD\command]
+@="cmd.exe /s /k pushd \"%W\" & \"%1\""
